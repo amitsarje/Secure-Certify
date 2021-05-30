@@ -1,0 +1,79 @@
+
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+
+{%block content %}
+    {% include 'header.html'%}
+    <div class="container-fluid title">
+        <div class="container"><h5 style="height:50px"><i class="fa fa-tasks" area-hidden='true'></i>&nbsp;{{type}}</h5></div>
+        <hr style="background-color: black;">
+      </div>
+
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3" style="margin-bottom:10px">
+            <div style=" height:100px ; text-align:center">
+              <h5>
+                Total added - {{count}}
+              </h5>
+    
+              <button id="addbutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                Add</button>
+            </div>
+      
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                  <form  action="{% url 'add_content' type %}" method="POST">
+                      {%csrf_token %}  
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle" >Add {{type}} details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      {{form|crispy}}
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+                  </form>
+                  </div>
+              </div>
+          </div>
+      
+          </div>
+          <div class="col-md-9">
+            <div class="scrolln">
+                {% for c in content %}
+                <div class="container" style="margin-bottom: 20px;">
+                  <div class="container ach" style="background-color: white; box-shadow: 0 0 10px rgba(0, 0, 0, 0.658);padding:10px;" class="list-group">
+                    <div class="row">
+                      <div class="col-md-10">
+                        {% ifequal type 'course'%}
+                        <h5 style="color:black;height:30px">{{c.Course_name}}</h5>
+                        {% else %}
+                        <h5 style="color:black;height:30px">{{c.Batch_name}}</h5>
+                        {% endifequal %}
+                      </div>
+                      <div class="col-md-2">
+                        <a href="{% url 'delete_content' c.id type %}">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}  
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <div class="container-fluid" style="position: relative; top:400px">
+    {% include 'footer.html'%}
+    </div>
+{% endblock content %}

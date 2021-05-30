@@ -1,0 +1,80 @@
+
+{% extends 'base.html'%}
+{% load static%}
+
+{%block content %}
+    {% include 'header.html'%}
+    {% if messages %}
+     {%for message in messages%}
+      <div class="alert alert-success" style="text-align: center;">
+          {{message}}
+      </div>
+     {%endfor%}
+    {% endif%}
+
+    <!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Send qr codes of selected Certificates?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" form="send_form">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container-fluid" style="text-align:center ; margin-top:10px">
+        <div class="container"><h5 style="height:50px"><i class="fa fa-check-square-o" aria-hidden="true"></i>&nbsp;Select</h5></div>
+        <hr style="background-color: black;">
+      </div>
+      <div class="container">
+        <form  id="send_form" action="{% url 'mail_qrcodes' %}" method="POST">
+            <div class="scrolln" style="height:400px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.658) ;margin-bottom:20px">
+            <table class="table"  style="background-color:white ;height:250px; margin-top:20px ; text-align:center">
+                <tr>
+                    <th>Id</th>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Select</th>
+                </tr>
+            {% csrf_token %}
+            {% for certificate in certificates %}
+            <tr>
+                <td>{{certificate.id}}</td>
+                <td>{{certificate.Student}}</td>
+                <td>{{certificate.Course}}</td>
+                <td><input type="checkbox" name="selected_certificates" id="" value="{{certificate.id}}" style="width: 20px;height:20px"></td>
+            </tr>
+            {% endfor %}
+            </table>
+            </div>
+            <div class="container" style="text-align: center;">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                Mail 
+            </button>
+            </div>
+
+        </form>
+    </div>
+    
+
+       
+
+    <div style="position: relative; top:120px">
+    {% include 'footer.html'%}
+    </div>
+{% endblock content %}

@@ -1,0 +1,80 @@
+
+{% extends 'base.html'%}
+{% load static%}
+
+{%block content %}
+    {% include 'header.html'%}
+    {% if messages %}
+     {%for message in messages%}
+      <div class="alert alert-success" style="text-align: center;">
+          {{message}}
+      </div>
+     {%endfor%}
+    {% endif%}
+    
+
+        <div class="container" style="margin-top:50px;">
+            <div class="row justify-content-md-center">
+             <div class="col-md-3">
+                <div class="card" style="width: 14rem;">
+                    <img class="card-img-top" src="{% static 'courses.jpg'%}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Courses</h5>
+                      <p class="card-text">Browse through different Courses</p>
+                      <a href="{% url 'view_content' 'course' %}" class="btn btn-primary">Go</a>
+                    </div>
+                  </div>
+             </div>
+             <div class="col-md-3">
+              <div class="card" style="width: 14rem;">
+                  <img class="card-img-top" src="{% static 'batches.png'%}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Batches</h5>
+                    <p class="card-text">Browse through different Batches</p>
+                    <a href="{% url 'view_content' 'batch' %}" class="btn btn-primary">Go</a>
+                  </div>
+                </div>
+           </div>
+           <div class="col-md-3">
+            <div class="card" style="width: 14rem;">
+                <img class="card-img-top" src="{% static 'certificates.jpg'%}" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Issued Certificates</h5>
+                  <p class="card-text">Check , verify issued certificates</p>
+                  <a href="{% url 'view_certificates' %}" class="btn btn-primary">Go</a>
+                </div>
+              </div>
+         </div>
+            </div>
+            <div class="row justify-content-md-center" style="margin-top:50px;">
+             <div class="col-md-3">
+                <div class="card" style="width: 14rem;">
+                    <img class="card-img-top" src="{% static 'send.png'%}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Send Certificates</h5>
+                     <p class="card-text">Send qr codes to students</p>
+                      <a href="{% url 'select_certificates' %}" class="btn btn-primary">Go</a>
+                    </div>
+                  </div>
+             </div>
+             <div class="col-md-3">
+                <div class="card" style="width: 14rem;">
+                    <img class="card-img-top" src="{% static 'students.jpg'%}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Add students</h5>
+                      <p class="card-text">Upload student details in CSV format</p>
+                      <a href="{% url 'get_student_data' %}" class="btn btn-primary">Go</a>
+                    </div>
+                </div>
+                
+              </div>
+             
+            </div>
+           
+        </div>
+
+
+    <div style="position: relative; top:120px">
+    {% include 'footer.html'%}
+    </div>
+{% endblock content %}

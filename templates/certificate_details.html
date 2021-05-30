@@ -1,0 +1,24 @@
+
+{% extends 'base.html'%}
+
+{%block content %}
+    {% include 'header.html'%}
+    <div class="container-fluid title">
+      <div class="container"><h5><i class="fa fa-certificate" aria-hidden="true"></i></i>&nbsp;Certificate details</h5></div>
+      <hr style="background-color: black;">
+    </div>
+  
+      <div class="container" style="text-align:center;">
+          <p>Certificate ID = {{c.id}}</p>
+          <p>Name = {{c.Student}}</p> 
+          <p>Course = {{c.Course}}</p>
+          <p>Batch = {{c.Batch}}</p>
+          <br>
+          <img class="img-fluid" src="{{c.Certificate.url}}" alt="">
+      </div>
+
+
+    <div class="container-fluid" style="position: relative; top:400px">
+    {% include 'footer.html'%}
+    </div>
+{% endblock content %}

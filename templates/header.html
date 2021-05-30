@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="container-fluid">
+        <h1 style="color: red;">Admin</h1>
+        
+    </div>
+    {% if user.is_authenticated %}
+    <div class="container-fluid" style="color:blue ; height:40px;">
+      <div style="float:left; margin-top:10px">
+        <span style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, serif; font-size:medium;color:blue;">
+          Welcome  {{request.user.username}}
+        </span>
+      </div>
+      
+      <div class="dropdown" style="float:right">
+        <h6 class="btn dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <b style="color:blue"><li class="fa fa-user-circle"></li>{{request.user}}</b>
+        </h6>
+        <div class="dropdown-menu" style="margin-right:30px;" >
+          <a class="dropdown-item" href="{% url 'home' %}"><li class="fa fa-home"></li> &nbsp;Home</a>
+          <a class="dropdown-item" href="/logout/"><li class="fa fa-sign-out"></li> &nbsp;Logout</a>
+        </div>
+      </div>
+      <div  style="float: right;">
+        {% if rcount %}
+        <a href="{% url 'requests' %}">
+        <button   class="btn btn-light" type="button" >
+          Requests <span class="badge badge-light" style="background-color:red;color:white">{{rcount}}</span>
+        </button>
+      </a>
+      {% endif%}
+      </div>
+      {% else %}
+
+      <hr>
+      <div class="container-fluid" style="color:blue ; height:40px ;margin-top:25px">
+        <h5 style = "text-align:center;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"> login </h5>
+      </div>
+      <hr>
+      {% endif %} 
+  </div>
